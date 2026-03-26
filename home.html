@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduLearn - Education App</title>
+<style>
+  * { box-sizing: border-box; margin:0; padding:0; font-family: 'Segoe UI', sans-serif; }
+
+  body { background: #f5f5f5; color: #333; line-height: 1.6; }
+
+  a { text-decoration: none; color: inherit; }
+
+  /* Header */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 5%;
+    background: #6a11cb;
+    color: #fff;
+  }
+  header h1 { font-size: 1.8em; }
+  header nav a {
+    margin-left: 2em;
+    color: #fff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  header nav a:hover { color: #ffdd59; }
+
+  #user-name {
+    margin-left: 2em;
+    font-weight: bold;
+  }
+
+  /* Hero Section */
+  .hero {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 4em 5%;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .hero-text {
+    flex: 1 1 500px;
+  }
+  .hero-text h2 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+  }
+  .hero-text p {
+    font-size: 1.1em;
+    margin-bottom: 1.5em;
+  }
+  .hero-text button {
+    padding: 0.8em 2em;
+    border: none;
+    background: #ffdd59;
+    color: #6a11cb;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .hero-text button:hover { transform: scale(1.05); }
+
+  .hero-image {
+    flex: 1 1 400px;
+    text-align: center;
+  }
+  .hero-image img {
+    max-width: 100%;
+    border-radius: 20px;
+  }
+
+  /* Features Section */
+  .features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 4em 5%;
+  }
+  .feature-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 2em;
+    margin: 1em;
+    flex: 1 1 250px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  .feature-card:hover { transform: translateY(-10px); }
+  .feature-card h3 { margin-bottom: 0.5em; color: #6a11cb; }
+  .feature-card p { font-size: 0.95em; }
+
+  /* Courses Section */
+  .courses {
+    padding: 4em 5%;
+  }
+  .courses h2 { text-align: center; margin-bottom: 2em; color: #6a11cb; }
+  .course-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .course-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1em;
+    margin: 1em;
+    flex: 1 1 250px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+  }
+  .course-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 1em;
+  }
+  .course-card h4 { margin-bottom: 0.5em; color: #2575fc; }
+  .course-card p { font-size: 0.9em; }
+
+  /* Footer */
+  footer {
+    padding: 2em 5%;
+    background: #333;
+    color: #fff;
+    text-align: center;
+  }
+
+  /* Responsive */
+  @media(max-width: 768px){
+    .hero { flex-direction: column; text-align: center; }
+    .hero-text { margin-bottom: 2em; }
+    .features, .course-list { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>EduLearn</h1>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#courses">Courses</a>
+    <a href="#features">Features</a>
+    <span id="user-name"></span>
+    <a href="#" id="logout">Logout</a>
+  </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-text">
+    <h2>Learn Anytime, Anywhere</h2>
+    <p>Access thousands of courses and improve your skills with our expert-led lessons.</p>
+    <button>Get Started</button>
+  </div>
+  <div class="hero-image">
+    <img src="1741ead35331b0901cf8da0058bb17a9-removebg-preview.png" alt="Education Illustration">
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+  <div class="feature-card">
+    <h3>Expert Tutors</h3>
+    <p>Learn from industry experts and gain practical knowledge.</p>
+  </div>
+  <div class="feature-card">
+    <h3>Flexible Learning</h3>
+    <p>Study at your own pace, anytime and anywhere.</p>
+  </div>
+  <div class="feature-card">
+    <h3>Certificates</h3>
+    <p>Get recognized for your skills with official certificates.</p>
+  </div>
+</section>
+
+<!-- Courses Section -->
+<section class="courses">
+  <h2>Popular Courses</h2>
+  <div class="course-list">
+    <div class="course-card">
+      <img src="https://images.unsplash.com/photo-1596496056730-20c0499f74d0?auto=format&fit=crop&w=600&q=80" alt="Course">
+      <h4>Web Development</h4>
+      <p>Learn HTML, CSS, JavaScript, and build modern websites from scratch.</p>
+    </div>
+    <div class="course-card">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80" alt="Course">
+      <h4>Data Science</h4>
+      <p>Master data analysis, Python, and machine learning to grow your career.</p>
+    </div>
+    <div class="course-card">
+      <img src="https://images.unsplash.com/photo-1581092336364-d924b1c8f877?auto=format&fit=crop&w=600&q=80" alt="Course">
+      <h4>Digital Marketing</h4>
+      <p>Learn SEO, social media marketing, and grow businesses online effectively.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 EduLearn. All Rights Reserved.
+</footer>
+
+<script>
+  // Get user from localStorage
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  if(user) {
+    document.getElementById('user-name').textContent = `Hello, ${user.name}`;
+  } else {
+    // Redirect to login page if not logged in
+    window.location.href = 'index.html';
+  }
+
+  // Logout
+  document.getElementById('logout').addEventListener('click', () => {
+    localStorage.removeItem('user');
+    window.location.href = 'index.html';
+  });
+</script>
+
+</body>
+</html>

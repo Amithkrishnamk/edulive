@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login & Signup Tabs with Sliding Indicator</title>
+<style>
+  * { box-sizing: border-box; margin:0; padding:0; font-family:'Segoe UI',sans-serif; }
+
+  body, html { height: 100%; }
+
+  .container {
+    display: flex;
+    height: 100vh;
+  }
+
+  /* Left side */
+  .left {
+    flex: 1;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .left-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2em;
+  }
+
+  .left-content h1 {
+    font-size: 2em;
+    margin-bottom: 1em;
+  }
+
+  .left-content img {
+    max-width: 80%;
+    height: auto;
+    border-radius: 20px;
+    margin-top: 1em;
+  }
+
+  /* Right side */
+  .right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+  }
+
+  .form-wrapper {
+    width: 80%;
+    max-width: 400px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Tabs */
+  .tab-buttons {
+    display: flex;
+    position: relative;
+    background: #eee;
+  }
+
+  .tab-buttons button {
+    flex: 1;
+    padding: 1em;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    color: #333;
+    font-weight: bold;
+    background: #eee;
+    transition: color 0.3s ease;
+  }
+
+  .tab-buttons button.active {
+    color: #6a11cb;
+  }
+
+  .indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    width: 50%;
+    background: #6a11cb;
+    transition: transform 0.3s ease;
+  }
+
+  /* Forms */
+  .form-container {
+    border-radius: 30px;
+    padding: 2em;
+    position: relative;
+    height: 300px;
+  }
+
+  .form-container form {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80%;
+    margin-top: 50px;
+    margin-left: 40px;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+  }
+
+  .form-container form input {
+    width: 100%;
+    padding: 0.8em;
+    margin: 0.5em 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .form-container form button {
+    width: 100%;
+    padding: 0.8em;
+    margin-top: 1em;
+    border: none;
+    border-radius: 5px;
+    background: #6a11cb;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+  }
+
+  /* Form animation */
+  .login-form { transform: translateX(0); opacity: 1; }
+  .signup-form { transform: translateX(100%); opacity: 0; }
+
+  .form-wrapper.signup-active .login-form {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  .form-wrapper.signup-active .signup-form {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  /* Responsive */
+  @media(max-width: 768px){
+    .container { flex-direction: column; }
+    .left, .right { flex: none; width: 100%; height: 40vh; }
+    .form-wrapper { width: 90%; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+      <div class="left-content">
+        <img src="undraw_secure-login_m11a-removebg-preview (3).png" alt="Login Illustration">
+      </div>
+    </div>
+    <div class="right">
+      <div class="form-wrapper" id="form-wrapper">
+        <div class="tab-buttons">
+          <button class="active" id="login-tab">Login</button>
+          <button id="signup-tab">Signup</button>
+          <div class="indicator" id="indicator"></div>
+        </div>
+        <div class="form-container">
+          <!-- Login Form -->
+          <form class="login-form">
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <button>Login</button>
+          </form>
+
+          <!-- Signup Form -->
+          <form class="signup-form">
+            <input type="text" placeholder="Name" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <button>Signup</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const formWrapper = document.getElementById('form-wrapper');
+  const loginTab = document.getElementById('login-tab');
+  const signupTab = document.getElementById('signup-tab');
+  const indicator = document.getElementById('indicator');
+
+  loginTab.addEventListener('click', () => {
+    formWrapper.classList.remove('signup-active');
+    loginTab.classList.add('active');
+    signupTab.classList.remove('active');
+    indicator.style.transform = 'translateX(0)';
+  });
+
+  signupTab.addEventListener('click', () => {
+    formWrapper.classList.add('signup-active');
+    signupTab.classList.add('active');
+    loginTab.classList.remove('active');
+    indicator.style.transform = 'translateX(100%)';
+  });
+ // Signup form
+document.querySelector('.signup-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const name = e.target[0].value;
+  const email = e.target[1].value;
+  const password = e.target[2].value;
+
+  const res = await fetch('http://localhost:5000/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, password })
+  });
+
+  const data = await res.json();
+  alert(data.message);
+});
+
+// Login form
+document.querySelector('.login-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = e.target[0].value;
+  const password = e.target[1].value;
+
+  const res = await fetch('http://localhost:5000/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password })
+  });
+
+  const data = await res.json();
+
+  if (res.ok) {
+    localStorage.setItem('user', JSON.stringify(data.user));
+    window.location.href = 'home.html';
+  } else {
+    alert(data.message);
+  }
+});
+</script>
+</body>
+</html>
